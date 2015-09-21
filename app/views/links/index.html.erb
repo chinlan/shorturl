@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Links</h1>
+
+
+<%= form_for(@link) do |f| %>
+  <% if @link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@link.errors.count, "error") %> prohibited this link from being saved:</h2>
+
+      <ul>
+      <% @link.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :in_url %><br>
+    <%= f.text_field :in_url, value: "http://" %>
+  </div>
+  <div class="field">
+    <%= f.label :out_url %><br>
+    <%= f.text_area :out_url, value: SecureRandom.hex(3),readonly: true %>
+  </div>
+  <div class="field">
+    <%= f.label :count %><br>
+    <%= f.number_field :count %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>In-url</th>
+      <th>Out-url</th>
+      <th>Count</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @links.each do |link| %>
+      <tr>
+        <td><%= link.in_url %></td>
+        <td><%=link_to link.out_url, link.in_url %></td>
+        <td><%= link.count %></td>
+   
+
+        <td><%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
