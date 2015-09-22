@@ -24,10 +24,7 @@
     <%= f.label :out_url %><br>
     <%= f.text_area :out_url, value: SecureRandom.hex(3),readonly: true %>
   </div>
-  <div class="field">
-    <%= f.label :count %><br>
-    <%= f.number_field :count %>
-  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
@@ -48,7 +45,7 @@
     <% @links.each do |link| %>
       <tr>
         <td><%= link.in_url %></td>
-        <td><%=link_to link.out_url, link.in_url %></td>
+        <td><%= link_to "#{link.out_url}", link.out_url %></td>
         <td><%= link.count %></td>
    
 

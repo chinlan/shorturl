@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
+
+  root 'links#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  resources :links
+  resources :links, except: :show
   # You can have the root of your site routed with "root"
-   root 'links#index'
+   
    get ':out_url' => 'links#go'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

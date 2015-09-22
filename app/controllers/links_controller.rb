@@ -10,30 +10,24 @@ class LinksController < ApplicationController
 
 
 
-  def show 
-    @link = Link.find(params[:id])
-  end
 
   def go
-    @link = Link.find(params[:out_url])
+    @link = Link.find_by_out_url(params[:out_url])
     @link.count = @link.count.to_i + 1
-    @link.save
+    @link.save! 
     redirect_to @link.in_url
   end
 
   def create
     @link = Link.new(link_params)
-
-    
-      @link.save
-        redirect_to links_path
-        
-    
+    @link.save
+    redirect_to links_path
   end
 
   # DELETE /links/1
   # DELETE /links/1.json
   def destroy
+    @link = Link.find(params[:id])
     @link.destroy
     respond_to do |format|
       format.html { redirect_to links_url, notice: 'Link was successfully destroyed.' }
